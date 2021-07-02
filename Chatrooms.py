@@ -117,7 +117,7 @@ class IRC_Application:
             convert_to_str = ""  # empty string to convert array into string
             # Add all the arguments beginning with # to a list of rooms
             if len(message) < 2:
-                sender_socket.send(f"/send requires a #roomname(s) argument(s).\nPlease enter: /join #roomname(s)\n".encode())
+                sender_socket.send(f"/send requires a #roomname(s) argument(s).\nPlease enter: /send #roomname(s)\n".encode())
             else:
                 for word in message.split():
                     if word[0] == '#':
@@ -127,7 +127,7 @@ class IRC_Application:
                     else:   # Assume the message is the string after the last room
                         message_to_send.append(word)
                 if rooms_to_send.count == 0:
-                    sender_socket.send(f"/send at least one #roomname(s) argument(s).\nPlease enter: /join #roomname(s)\n".encode())
+                    sender_socket.send(f"/send at least one #roomname(s) argument(s).\nPlease enter: /send #roomname(s)\n".encode())
                 else:
                     convert_to_str = ' '.join([str(word) for word in message_to_send])
                     convert_to_str = convert_to_str + '\n'
