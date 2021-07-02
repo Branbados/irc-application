@@ -10,7 +10,7 @@
 This project implements a client and server for an Internet Relay Chat (IRC) application. The server is able to relay text between clients using websockets. Clients are able to make chatrooms and send messages to rooms for other clients to see.
 
 # Technologies
-This was written in Python using the socket, sys, and select packages.
+This was written in Python using the socket, sys, and select packages. Testing is done using Pytest and unittest, and continuous integration is implemented using CircleCI.
 
 # Installation
 Make sure that you have Python 3 installed. The following commands will install the project and run the server.
