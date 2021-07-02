@@ -1,4 +1,4 @@
-[![status](https://circleci.com/gh/Branbados/irc-application.svg?style=svg)](https://app.circleci.com/pipelines/github/Branbados/irc-application)
+[![status](https://circleci.com/gh/Branbados/irc-application.svg?style=shield)](https://app.circleci.com/pipelines/github/Branbados/irc-application)
 # Table of Contents
 * [Introduction](#Introduction)
 * [Technologies](#Technologies)
