@@ -39,7 +39,7 @@ python3 Client.py
 ```/send```: Sends a message to a room the client has joined. Can send to multiple rooms.  
 ```
 /send #coding Boy I sure love Python!
-/send #coding #python Looks at this IRC app I made!
+/send #coding #python Look at this IRC app I made!
 ```
 ```/members```: Lists all clients in a room.  
 ```/quit```: Disconnects the client from the server.  
