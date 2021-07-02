@@ -12,7 +12,10 @@ def message_broadcast(room, sender_name, sender_socket, message):
     # Send the message to all clients except the one that sent the messaage
     for client_socket in room.client_sockets:
         if client_socket != sender_socket:
-            client_socket.send(f"{room.name} : {sender_name} > {message}".encode())
+            try:
+                client_socket.send(f"{room.name} : {sender_name} > {message}".encode())
+            except e:
+                print('Failed to send message to client')
 
 
 # The container that has rooms, which have lists of clients
@@ -34,18 +37,23 @@ class IRC_Application:
     def join_room(self, room_to_join, sender_socket, sender_name):
         if room_to_join[0] != '#':
             sender_socket.send("Error: Room name must begin with a '#'\n".encode())
-        else:
-            if room_to_join not in self.rooms:  # Assume that the room does not exist yet
-                new_room = Chatroom(room_to_join)
-                self.rooms[room_to_join] = new_room
-                self.rooms[room_to_join].add_new_client_to_chatroom(sender_name, sender_socket)
-            else:  # otherwise, go through the room members to make sure that the sender is not in it already
-                for current_members in self.rooms[room_to_join].client_sockets:
-                    if sender_socket == current_members:
-                        sender_socket.send(f"Error: You are already in the room: {room_to_join}\n".encode())
-                    else:
-                        # if we are here then the room exists and the sender is not in it.
-                        self.rooms[room_to_join].add_new_client_to_chatroom(sender_name, sender_socket)
+            return
+        if room_to_join not in self.rooms:  # Assume that the room does not exist yet
+            self.create_room(room_to_join, sender_socket, sender_name)
+        else:  # otherwise, go through the room members to make sure that the sender is not in it already
+            for current_members in self.rooms[room_to_join].client_sockets:
+                if sender_socket == current_members:
+                    sender_socket.send(f"Error: You are already in the room: {room_to_join}\n".encode())
+                else:
+                    # if we are here then the room exists and the sender is not in it.
+                    self.rooms[room_to_join].add_new_client_to_chatroom(sender_name, sender_socket)
+
+    # Create a new Chatroom, add the room to the room list, and add the client to the chatroom
+    # A room cannot exist without a client, so one must be supplied
+    def create_room(self, room_to_join, sender_socket, sender_name):
+        new_room = Chatroom(room_to_join)
+        self.rooms[room_to_join] = new_room
+        self.rooms[room_to_join].add_new_client_to_chatroom(sender_name, sender_socket)
 
     # Check if the room exists, check if user is in the room,
     # remove user from room and delete room if it is empty
