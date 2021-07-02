@@ -1,3 +1,4 @@
+[![<ORG_NAME>](https://app.circleci.com/pipelines/github/Branbados/irc-application.svg?style=svg)](https://app.circleci.com/pipelines/github/Branbados/irc-application)
 # Table of Contents
 * [Introduction](#Introduction)
 * [Technologies](#Technologies)
