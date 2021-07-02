@@ -1,5 +1,3 @@
-from sys import getsizeof
-import pytest
 from unittest import mock
 import Chatrooms
 
