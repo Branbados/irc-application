@@ -7,6 +7,9 @@ IRC - Client Application
 import socket, select, sys, Server  # TODO remove socket since we do not use it here either
 # from Server import BUFFER_SIZE TODO remove since we likely do not need this
 
+# Define the host IP and port for the server
+HOST = socket.gethostname()
+PORT = 5050
 
 # Give the user a prompt for input
 def user_input(username):
@@ -64,3 +67,25 @@ def irc_client():
 
 if __name__ == "__main__":
     irc_client()
+
+class Client:
+    def __init__(self, name, host, port, server_socket):
+        self.name = name
+        self.host = host
+        self.port = port
+        self.server_socket = server_socket
+    
+    @classmethod
+    def from_input(cls, server_socket):
+        return(input("Enter username: "),
+                HOST,
+                PORT,
+                server_socket)
+
+    # Give the user a prompt for input
+    def user_input(self):
+        sys.stdout.write(f"{self.name} > ")
+        sys.stdout.flush()
+    
+    def io_loop(self):
+        ...
